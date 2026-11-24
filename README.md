@@ -1,33 +1,43 @@
 Python Server Health Monitoring System
 
-A Python-based server monitoring tool that tracks CPU, RAM, and disk usage, checks configurable thresholds, generates alerts, and records monitoring information in log files.
+This is an individual Python project I built to learn more about system monitoring and DevOps fundamentals.
+
+The application monitors CPU usage, RAM usage, and disk usage. It checks these values against configurable limits and generates alerts when resource usage goes beyond the defined thresholds.
+
+It also records monitoring information in a log file, making it easier to track events and identify errors.
 
 Features
 
-- CPU Monitoring: Tracks CPU utilization.
-- RAM Monitoring: Tracks memory utilization.
-- Disk Monitoring: Tracks disk usage.
-- Configurable Thresholds: Set CPU, RAM, and disk limits using "config.json".
-- Automated Alerts: Detects when resource usage exceeds configured limits.
-- Overall Health Status: Reports whether the server is HEALTHY or WARNING.
-- Monitoring Summary: Counts healthy and warning metrics.
-- Error Handling: Handles monitoring failures and retries after the configured interval.
-- Logging: Records monitoring information, warnings, and errors.
-- Configuration Validation: Checks configuration values before monitoring starts.
-- Unit Testing: Includes automated tests for monitoring, alerts, and configuration.
+- CPU Monitoring: Checks current CPU utilization.
+- RAM Monitoring: Tracks memory usage.
+- Disk Monitoring: Checks disk space utilization.
+- Configurable Thresholds: Allows resource limits and monitoring intervals to be changed through `config.json`.
+- Alerts: Detects when CPU, RAM, or disk usage exceeds the configured limits.
+- Health Status: Displays an overall HEALTHY or WARNING status.
+- Monitoring Summary: Shows the number of healthy and warning metrics.
+- Error Handling: Handles monitoring errors and continues monitoring after the configured interval.
+- Logging:** Records monitoring activity, warnings, and errors in a log file.
+- Configuration Validation: Checks configuration values before starting the monitoring process.
+- Unit Testing: Includes tests for monitoring, alert handling, and configuration validation.
 
 Technologies Used
 
 - Python
 - psutil
 - JSON
-- Logging
-- Unittest
+- Python Logging
+- unittest
 - Git and GitHub
+- GitHub Actions
 
 Project Structure
 
-server-health-monitor/
+```text
+Python-Server-Health-Monitor/
+│
+├── .github/
+│   └── workflows/
+│       └── python-tests.yml
 │
 ├── main.py
 ├── monitor.py
@@ -40,81 +50,102 @@ server-health-monitor/
 ├── test_monitor.py
 ├── .gitignore
 └── README.md
+```
 
-Installation
+Getting Started
 
 1. Clone the repository
 
-git clone YOUR_GITHUB_REPOSITORY_URL
+```bash
+git clone https://github.com/Asfaqsulaim/Python-Server-Health-Monitor.git
+```
 
-2. Navigate to the project folder
+2. Open the project folder
 
-cd server-health-monitor
+```bash
+cd Python-Server-Health-Monitor
+```
 
-3. Install dependencies
+3. Install the required dependencies
 
+```bash
 python -m pip install -r requirements.txt
+```
 
 Configuration
 
-Edit "config.json" to customize monitoring thresholds and intervals.
+The monitoring thresholds and interval can be changed in `config.json`.
 
-Example:
+Example configuration:
 
+```json
 {
     "CPU_LIMIT": 80,
     "RAM_LIMIT": 75,
     "DISK_LIMIT": 90,
     "INTERVAL": 5
 }
+```
 
-- CPU_LIMIT: Maximum CPU usage percentage.
-- RAM_LIMIT: Maximum RAM usage percentage.
-- DISK_LIMIT: Maximum disk usage percentage.
-- INTERVAL: Monitoring interval in seconds.
+- `CPU_LIMIT`: Maximum CPU usage percentage.
+- `RAM_LIMIT`: Maximum RAM usage percentage.
+- `DISK_LIMIT`: Maximum disk usage percentage.
+- `INTERVAL`: Time between monitoring cycles, in seconds.
+
+The configuration loader checks these values before the monitoring process starts.
 
 Running the Application
 
-Start the monitoring system:
+Run the following command from the project directory:
 
+```bash
 python main.py
+```
 
-The application continuously monitors system resources and displays monitoring reports in the terminal.
+The application will continuously monitor system resources and display the results in the terminal.
 
-Running Tests
+Running the Tests
 
-Execute the automated test suite:
+I included unit tests to check the monitoring functions, alert conditions, and configuration validation.
 
+To run all tests:
+
+```bash
 python -m unittest discover -v
+```
 
-Logging
+GitHub Actions
 
-Monitoring information, warnings, and errors are recorded in "server_monitor.log".
+I also added a GitHub Actions workflow to automate the testing process.
 
-The log file helps track system performance and troubleshoot monitoring failures.
+Whenever code is pushed or a pull request is created, the workflow:
 
-Learning Outcomes
+1. Sets up the Python environment.
+2. Installs the required dependencies.
+3. Runs the unit tests.
+4. Reports whether the tests pass or fail.
 
-Through this project, I practised:
+This helped me understand the basics of Continuous Integration (CI) and how automated testing can be included in a development workflow.
 
-- Python programming and OOP fundamentals.
-- Working with external Python libraries.
-- System resource monitoring.
-- Configuration management using JSON.
-- Exception handling and recovery.
-- Logging and debugging.
-- Unit testing.
-- Git and GitHub project management.
+What I Learned
+
+While building this project, I got practical experience with:
+
+- Monitoring system resources using Python.
+- Working with the `psutil` library.
+- Managing configuration through JSON.
+- Handling exceptions and application errors.
+- Implementing logging for monitoring and debugging.
+- Writing unit tests.
+- Using Git and GitHub to manage project changes.
+- Setting up a basic CI workflow with GitHub Actions.
 
 Future Improvements
 
+Some features I'd like to explore in future versions:
+
 - Email notifications for critical alerts.
-- Web-based monitoring dashboard.
-- Historical performance reports.
+- Historical monitoring reports.
 - Docker containerization.
-- Cloud-based monitoring integration.
-
----
-
-Project: Python Server Health Monitoring System
-Purpose: Practical learning project focused on Python, system monitoring, and DevOps fundamentals.
+- Integration with cloud monitoring services.
+- An optional web-based dashboard.
